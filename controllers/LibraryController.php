@@ -8,6 +8,7 @@ use app\models\LibrarySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
 class LibraryController extends Controller
 {   
    
@@ -19,10 +20,13 @@ class LibraryController extends Controller
             $query = '%'.$query.'%';
             $sql = "select * from library where name like :name or auther like :auther ";
             $result = Library::findBySql($sql, array('name' =>$query, 'auther'=>$query)) ->all();
-            return $this -> render('index', [ 'arrs' =>  $result]);
+            echo Json::encode($result);
+            // return echo Json::encode($result);
+            // return $this -> render('index', [ 'arrs' =>  $result]);
         }else {
             $result = Library::find() -> all();
-            return $this -> render('index', [ 'arrs' =>  $result]);
+            echo Json::encode($result);
+            // return $this -> render('index', [ 'arrs' =>  $result]);
         }
         
     }
@@ -31,7 +35,9 @@ class LibraryController extends Controller
         $request = Yii::$app->request;
         $sql = "select * from library where id=:id";
         $result = Library::findBySql($sql, array('id' =>$id)) -> asArray() ->all();
-        return $this -> render('view', $result[0]);
+        echo Json::encode($result);
+        // return 
+        // return $this -> render('view', $result[0]);
 
     }
 
