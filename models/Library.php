@@ -10,8 +10,8 @@ class Library extends ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'price'], 'integer'],
-            [['name', 'auther'], 'safe'],
+            [['id'], 'integer'],
+            [['name', 'auther', 'price'], 'safe'],
         ];
     }
 
